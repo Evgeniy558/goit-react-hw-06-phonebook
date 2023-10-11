@@ -65,9 +65,9 @@ export const App = () => {
   //   setContacts(contactsAfterDel);
   // };
 
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
-  };
+  // const handleDeleteContact = (id) => {
+  //   dispatch(deleteContact(id));
+  // };
 
   const displayedContacts = filter
     ? filterContacts(contacts, filter)
@@ -84,10 +84,7 @@ export const App = () => {
           <h2>Contacts</h2>
           <Filter />
           {displayedContacts.length > 0 ? (
-            <ContactList
-              displayedContacts={displayedContacts}
-              onClick={handleDeleteContact}
-            />
+            <ContactList displayedContacts={displayedContacts} />
           ) : (
             <p> No contacts </p>
           )}

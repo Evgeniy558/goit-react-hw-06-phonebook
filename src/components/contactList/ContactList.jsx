@@ -1,8 +1,15 @@
+import { useDispatch } from "react-redux";
 import Button from "../contactForm/button/Button";
 import css from "./ContactList.module.css";
 import PropTypes from "prop-types";
+import { deleteContact } from "../redux/slices/contactsSlice";
 
-const ContactList = ({ displayedContacts, onClick }) => {
+const ContactList = ({ displayedContacts }) => {
+  const dispatch = useDispatch();
+  const handleDeleteContact = (id) => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul>
       {displayedContacts.map((el) => {
@@ -14,7 +21,7 @@ const ContactList = ({ displayedContacts, onClick }) => {
             <Button
               className={css.align_btn}
               type="button"
-              onClick={() => onClick(el.id)}
+              onClick={() => handleDeleteContact(el.id)}
               typebutton={"button_del"}
             >
               Delete
@@ -27,6 +34,5 @@ const ContactList = ({ displayedContacts, onClick }) => {
 };
 ContactList.propTypes = {
   displayedContacts: PropTypes.array.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 export default ContactList;

@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import css from "./ContactsForm.module.css";
 import Button from "./button/Button";
-import PropTypes from "prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../redux/slices/contactsSlice";
