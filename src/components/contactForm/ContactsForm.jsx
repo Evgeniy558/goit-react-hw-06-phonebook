@@ -2,23 +2,52 @@ import { nanoid } from "nanoid";
 import css from "./ContactsForm.module.css";
 import Button from "./button/Button";
 import PropTypes from "prop-types";
-import { useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addContact } from "../redux/slices/contactsSlice";
+import { getContacts } from "../redux/selectors";
+
 const patternName = "^[a-zA-Z]+(([' \u2013][a-zA-Z])?[a-zA-Z]*)*$";
 const patternTel = "^\\+48\\d{3}\\d{3}\\d{3}$";
 
-const Form = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({ name: "", number: "" });
+const Form = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
-  const handleInputChanche = (ev) => {
-    const { name, value } = ev.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleInputChanche = (ev) => {
+  //   const { name, value } = ev.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const form = ev.target;
-    onSubmit(formData);
-    form.reset();
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+    console.log(name, number);
+    if (
+      contacts.find((el) => {
+        return el.name.toLocaleLowerCase() === name.toLowerCase();
+      })
+    ) {
+      alert(`${name} is already in contacts`);
+    } else {
+      dispatch(addContact(name, number));
+
+      form.reset();
+    }
+
+    // const addNewContact = (formData) => {
+    //   const { name, number } = formData;
+
+    //   // setContacts((prevContacts) => {
+    //   //   const updatedContacts = [
+    //   //     ...prevContacts,
+    //   //     { id: nanoid(), name: name, number: number },
+    //   //   ];
+    //   //   return updatedContacts;
+    //   // });
+    // };
   };
 
   return (
@@ -27,7 +56,7 @@ const Form = ({ onSubmit }) => {
         Name
         <input
           className={css.input}
-          onChange={handleInputChanche}
+          // onChange={handleInputChanche}
           id={nanoid()}
           type="text"
           name="name"
@@ -40,7 +69,7 @@ const Form = ({ onSubmit }) => {
         Number
         <input
           className={css.input}
-          onChange={handleInputChanche}
+          // onChange={handleInputChanche}
           type="tel"
           name="number"
           pattern={patternTel}
@@ -53,7 +82,5 @@ const Form = ({ onSubmit }) => {
     </form>
   );
 };
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+
 export default Form;

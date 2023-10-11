@@ -38,29 +38,25 @@ export const App = () => {
   //   }
   // }, [contacts]);
 
-  const addNewContact = (formData) => {
-    const { name, number } = formData;
-    if (
-      contacts.find((el) => {
-        return el.name.toLocaleLowerCase() === name.toLowerCase();
-      })
-    ) {
-      alert(`${name} is already in contacts`);
-    } else {
-      dispatch(addContact(name, number));
-      // setContacts((prevContacts) => {
-      //   const updatedContacts = [
-      //     ...prevContacts,
-      //     { id: nanoid(), name: name, number: number },
-      //   ];
-      //   return updatedContacts;
-      // });
-    }
-  };
-
-  const handleSearch = (SearchValue) => {
-    setfilter(SearchValue);
-  };
+  // const addNewContact = (formData) => {
+  //   const { name, number } = formData;
+  //   if (
+  //     contacts.find((el) => {
+  //       return el.name.toLocaleLowerCase() === name.toLowerCase();
+  //     })
+  //   ) {
+  //     alert(`${name} is already in contacts`);
+  //   } else {
+  //     dispatch(addContact(name, number));
+  //     // setContacts((prevContacts) => {
+  //     //   const updatedContacts = [
+  //     //     ...prevContacts,
+  //     //     { id: nanoid(), name: name, number: number },
+  //     //   ];
+  //     //   return updatedContacts;
+  //     // });
+  //   }
+  // };
 
   // const deleteContact = (id) => {
   //   const contactsAfterDel = getFromLocalStorage().filter((el) => {
@@ -82,11 +78,11 @@ export const App = () => {
       <header className={css.appheader}>
         <section className={css.section}>
           <h1>Phonebook</h1>
-          <Form onSubmit={addNewContact} />
+          <Form />
         </section>
         <section className={css.section}>
           <h2>Contacts</h2>
-          <Filter onChange={handleSearch} />
+          <Filter />
           {displayedContacts.length > 0 ? (
             <ContactList
               displayedContacts={displayedContacts}
