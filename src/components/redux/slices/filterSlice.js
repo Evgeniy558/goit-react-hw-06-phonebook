@@ -6,9 +6,9 @@ const filterInitialState = {
 const filterSlice = createSlice({
   name: "filter",
   initialState: filterInitialState,
-  redusers: {
+  reducers: {
     setFilter(state, action) {
-      state.state = action.payload;
+      state.status = action.payload;
     },
   },
 });

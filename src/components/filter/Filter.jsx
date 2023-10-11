@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import css from "./Filter.module.css";
-
 import { setFilter } from "../redux/slices/filterSlice";
 
 const Filter = () => {
@@ -24,5 +23,4 @@ const Filter = () => {
     </div>
   );
 };
-
 export default Filter;

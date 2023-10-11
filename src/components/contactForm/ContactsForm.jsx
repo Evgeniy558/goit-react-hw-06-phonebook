@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import css from "./ContactsForm.module.css";
 import Button from "./button/Button";
-
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../redux/slices/contactsSlice";
 import { getContacts } from "../redux/selectors";
@@ -13,17 +12,11 @@ const Form = () => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
-  // const handleInputChanche = (ev) => {
-  //   const { name, value } = ev.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const form = ev.target;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    console.log(name, number);
     if (
       contacts.find((el) => {
         return el.name.toLocaleLowerCase() === name.toLowerCase();
@@ -32,21 +25,8 @@ const Form = () => {
       alert(`${name} is already in contacts`);
     } else {
       dispatch(addContact(name, number));
-
       form.reset();
     }
-
-    // const addNewContact = (formData) => {
-    //   const { name, number } = formData;
-
-    //   // setContacts((prevContacts) => {
-    //   //   const updatedContacts = [
-    //   //     ...prevContacts,
-    //   //     { id: nanoid(), name: name, number: number },
-    //   //   ];
-    //   //   return updatedContacts;
-    //   // });
-    // };
   };
 
   return (
@@ -55,7 +35,6 @@ const Form = () => {
         Name
         <input
           className={css.input}
-          // onChange={handleInputChanche}
           id={nanoid()}
           type="text"
           name="name"
@@ -68,7 +47,6 @@ const Form = () => {
         Number
         <input
           className={css.input}
-          // onChange={handleInputChanche}
           type="tel"
           name="number"
           pattern={patternTel}
