@@ -9,7 +9,10 @@ import { getFromLocalStorage } from "./components/serveces/getFromLocalStorage";
 import { filterContacts } from "./components/serveces/filterContacts";
 import { useDispatch, useSelector } from "react-redux";
 import { getContacts, getFilter } from "./components/redux/selectors";
-import { addContact } from "./components/redux/slices/contactsSlice";
+import {
+  addContact,
+  deleteContact,
+} from "./components/redux/slices/contactsSlice";
 export const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
@@ -27,12 +30,13 @@ export const App = () => {
   //   }
   // }, []);
 
-  useEffect(() => {
-    saveToLocalStorage(contacts);
-    if (contacts.length === 0) {
-      localStorage.removeItem("contacts");
-    }
-  }, [contacts]);
+  //del from localStorage
+  // useEffect(() => {
+  //   saveToLocalStorage(contacts);
+  //   if (contacts.length === 0) {
+  //     localStorage.removeItem("contacts");
+  //   }
+  // }, [contacts]);
 
   const addNewContact = (formData) => {
     const { name, number } = formData;
@@ -58,11 +62,15 @@ export const App = () => {
     setfilter(SearchValue);
   };
 
-  const deleteContact = (id) => {
-    const contactsAfterDel = getFromLocalStorage().filter((el) => {
-      return el.id !== id;
-    });
-    setContacts(contactsAfterDel);
+  // const deleteContact = (id) => {
+  //   const contactsAfterDel = getFromLocalStorage().filter((el) => {
+  //     return el.id !== id;
+  //   });
+  //   setContacts(contactsAfterDel);
+  // };
+
+  const handleDeleteContact = (id) => {
+    dispatch(deleteContact(id));
   };
 
   const displayedContacts = filter
@@ -82,7 +90,7 @@ export const App = () => {
           {displayedContacts.length > 0 ? (
             <ContactList
               displayedContacts={displayedContacts}
-              onClick={deleteContact}
+              onClick={handleDeleteContact}
             />
           ) : (
             <p> No contacts </p>
