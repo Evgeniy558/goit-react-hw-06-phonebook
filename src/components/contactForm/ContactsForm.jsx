@@ -55,7 +55,7 @@ const Form = () => {
           required
         />
       </label>
-      <Button typebutton={"button_add"}>ADD CONTACTS</Button>
+      <Button typeButton={"button_add"}>ADD CONTACTS</Button>
     </form>
   );
 };

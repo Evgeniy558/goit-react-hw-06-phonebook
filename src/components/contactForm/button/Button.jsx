@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/slices/contactsSlice";
 
-const Button = ({ children, typebutton, idButton }) => {
+const Button = ({ children, typeButton, idButton }) => {
   const dispatch = useDispatch();
   const handleDeleteContact = (id) => {
     dispatch(deleteContact(id));
   };
 
   const classButton =
-    typebutton === "button_add"
+    typeButton === "button_add"
       ? css["button_add"]
-      : typebutton === "button_del"
+      : typeButton === "button_del"
       ? css["button_del"]
       : css["button"];
 
@@ -31,7 +31,7 @@ const Button = ({ children, typebutton, idButton }) => {
 };
 
 Button.propTypes = {
-  typebutton: PropTypes.string.isRequired,
+  typeButton: PropTypes.string.isRequired,
   idButton: PropTypes.string,
 };
 export default Button;

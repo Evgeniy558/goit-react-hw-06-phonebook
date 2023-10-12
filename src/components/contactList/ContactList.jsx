@@ -15,7 +15,7 @@ const ContactList = ({ displayedContacts }) => {
               className={css.align_btn}
               type="button"
               idButton={el.id}
-              typebutton={"button_del"}
+              typeButton={"button_del"}
             >
               Delete
             </Button>
